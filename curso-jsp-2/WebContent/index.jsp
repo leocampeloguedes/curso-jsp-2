@@ -4,9 +4,17 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Curso JSP</title>
 </head>
 <body>
-
+	<h1>Bem vindo ao curso Jsp</h1>
+	
+	<form action="ServletLogin" method="post">
+		<input name="nome">
+		<input name="idade">
+		
+		<input type="submit" value="Enviar">
+	</form>
+	
 </body>
 </html>
