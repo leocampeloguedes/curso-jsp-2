@@ -12,7 +12,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-@WebFilter(urlPatterns = "/principal/*") /* intercepta todas as requisições que vierem do projeto ou mapeado */
+@WebFilter(urlPatterns = {"/principal/*"}) /* intercepta todas as requisições que vierem do projeto ou mapeado */
 public class FilterAutenticacao implements Filter {
 
 	public FilterAutenticacao() {
@@ -34,23 +34,23 @@ public class FilterAutenticacao implements Filter {
 
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
-
+		
 		String usuarioLogado = (String) session.getAttribute("usuario");
-
-		String urlParaAutenticar = req.getServletPath(); /* Url qu eestá sendo acessada */
-
-		/* Validar se está logado, senao redireciona para tela de login */
-		if (usuarioLogado == null && 
-				!urlParaAutenticar.contains("/principal/ServletLogin")) {
+		
+		String urlParaAutenticar = req.getServletPath();/*Url que está sendo acessada*/
+		
+		/*Validar se está logado senão redireciona para a tela de login*/
+		if (usuarioLogado == null  && !urlParaAutenticar.equalsIgnoreCase("/principal/ServletLogin")) {/*Não está logado*/
+			
 			RequestDispatcher redireciona = request.getRequestDispatcher("/index.jsp?url=" + urlParaAutenticar);
-			request.setAttribute("msg", "Por favor Realize o Login!");
+			request.setAttribute("msg", "Por favor realize o login!");
 			redireciona.forward(request, response);
-			return;
-
-		} else {
-
+			return; /*Para a execução e redireciona para o login*/
+			
+		}else {
 			chain.doFilter(request, response);
 		}
+	
 	}
 
 	/* Inicia os processos ou recursos quando o servidor sobe o projeto */
