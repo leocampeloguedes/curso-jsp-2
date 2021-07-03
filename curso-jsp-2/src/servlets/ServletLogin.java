@@ -26,6 +26,16 @@ public class ServletLogin extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		String acao = request.getParameter("acao");
+		if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("logout")) {
+			request.getSession().invalidate(); // invalida sessão
+			RequestDispatcher redirecionar = request.getRequestDispatcher("index.jsp");
+			redirecionar.forward(request, response);
+			
+		} else {
+			doPost(request, response);
+		}
+
 	}
 
 	/* recebe os dados enviados por um formulário */
@@ -61,13 +71,17 @@ public class ServletLogin extends HttpServlet {
 				}
 
 			} else {
-				RequestDispatcher redirecionar = request.getRequestDispatcher("/index.jsp");
+				RequestDispatcher redirecionar = request.getRequestDispatcher("index.jsp");
 				request.setAttribute("msg", "Informe o login e senha corretamente!");
 				redirecionar.forward(request, response);
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			RequestDispatcher redirecionar = request.getRequestDispatcher("erro.jsp");
+			request.setAttribute("msg", e.getMessage());
+			redirecionar.forward(request, response);
+
 		}
 
 	}
