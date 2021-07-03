@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-	<jsp:include page="head.jsp"></jsp:include>
+<jsp:include page="head.jsp"></jsp:include>
 
 <body>
 	<jsp:include page="theme-loader.jsp"></jsp:include>
@@ -16,23 +16,32 @@
 
 			<div class="pcoded-main-container">
 				<div class="pcoded-wrapper">
-					
+
 					<jsp:include page="navbarmainmenu.jsp"></jsp:include>
-					
+
 					<div class="pcoded-content">
-						
+
 						<jsp:include page="page-header.jsp"></jsp:include>
-						
+
 						<div class="pcoded-inner-content">
 							<!-- Main-body start -->
 							<div class="main-body">
 								<div class="page-wrapper">
 									<!-- Page-body start -->
 									<div class="page-body">
-										<div class="row">
-												<h1>Cadastro de Usuário</h1>	
-											
-										</div>
+										
+											<h1>Cadastro de Usuário</h1>
+
+											<form>
+												<div class="form-group row">
+													<label class="col-sm-2 col-form-label">Simple Input</label>
+													<div class="col-sm-10">
+														<input type="text" class="form-control">
+													</div>
+												</div>
+											</form>
+
+										
 									</div>
 									<!-- Page-body end -->
 								</div>
