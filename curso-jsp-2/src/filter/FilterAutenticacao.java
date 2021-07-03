@@ -1,6 +1,8 @@
 package filter;
 
 import java.io.IOException;
+import java.sql.Connection;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -12,8 +14,12 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import connection.SingleConnectionBanco;
+
 @WebFilter(urlPatterns = {"/principal/*"}) /* intercepta todas as requisições que vierem do projeto ou mapeado */
 public class FilterAutenticacao implements Filter {
+	
+	private static Connection connection;
 
 	public FilterAutenticacao() {
 
@@ -22,6 +28,11 @@ public class FilterAutenticacao implements Filter {
 	/* Encerra os processos quando o servidor é parado */
 	/* Mataria os processo de conexão com o banco, caso servidor ficar offline */
 	public void destroy() {
+		try {
+			connection.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
@@ -31,7 +42,8 @@ public class FilterAutenticacao implements Filter {
 	/* Dar commit e rolback de transações do banco */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-
+		
+		try {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
 		
@@ -50,13 +62,19 @@ public class FilterAutenticacao implements Filter {
 		}else {
 			chain.doFilter(request, response);
 		}
+		
+		connection.commit(); //deu tudo certo comita as transações
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	
 	}
 
 	/* Inicia os processos ou recursos quando o servidor sobe o projeto */
 	/* inicia a conexão com o banco */
 	public void init(FilterConfig fConfig) throws ServletException {
-
+		connection = SingleConnectionBanco.getConnection();
 	}
 
 }
