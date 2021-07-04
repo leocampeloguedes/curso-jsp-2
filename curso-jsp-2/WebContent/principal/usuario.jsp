@@ -29,19 +29,54 @@
 								<div class="page-wrapper">
 									<!-- Page-body start -->
 									<div class="page-body">
-										
-											<h1>Cadastro de Usuário</h1>
 
-											<form>
-												<div class="form-group row">
-													<label class="col-sm-2 col-form-label">Simple Input</label>
-													<div class="col-sm-10">
-														<input type="text" class="form-control">
+										<div class="card">
+											<div class="card-block">
+												<h4 class="sub-title">Cadastro de Usuário</h4>
+												
+												<form class="form-material" action="<%= request.getContextPath() %>/ServletUsuarioController" method="post">
+														<div class="form-group form-default">
+														<input type="text" name="id" id="id" readonly="readonly" value="${modelLogin.id}"
+															class="form-control" > <span
+															class="form-bar"></span> <label class="float-label">ID:</label>
 													</div>
-												</div>
-											</form>
+													<div class="form-group form-default">
+														<input type="text" name="nome" id="nome"  value="${modelLogin.nome}"
+															class="form-control" required="required"> <span
+															class="form-bar"></span> <label class="float-label">Nome</label>
+													</div>
+													<div class="form-group form-default">
+														<input type="email" name="email" id="email" autocomplete="off"  value="${modelLogin.email}"
+															class="form-control" required="required"> <span
+															class="form-bar"></span> <label class="float-label">Email
+															(email@gmail.com)</label>
+													</div>
+													<div class="form-group form-default">
+														<input type="text" name="login" id="login" autocomplete="off"  value="${modelLogin.login}"
+															class="form-control" required="required"> <span
+															class="form-bar"></span> <label class="float-label">Login</label>
+													</div>
+													<div class="form-group form-default">
+														<input type="password" name="senha" id="senha" autocomplete="off"  value="${modelLogin.senha}"
+															class="form-control" required="required"> <span
+															class="form-bar"></span> <label class="float-label">Senha</label>
+													</div>
+													
+													
+													
+													<button class="btn btn-primary waves-effect waves-light">Novo</button>
+										            <button class="btn btn-success waves-effect waves-light">Salvar</button>
+										            <button class="btn btn-info waves-effect waves-light">Excluir</button>
+										            
+												</form>
+											</div>
+										</div>
 
-										
+
+
+
+
+
 									</div>
 									<!-- Page-body end -->
 								</div>
