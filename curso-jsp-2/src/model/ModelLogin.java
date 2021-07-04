@@ -9,6 +9,17 @@ public class ModelLogin implements Serializable {
 	private Long id;
 	private String nome;
 	private String email;
+	private String login;
+	private String senha;
+
+	public boolean isNovo() {
+		if (this.id == null)
+			return true; /* inserir novo */
+		else if (this.id != null && this.id > 0)
+			return false; /* atualizar */
+
+		return this.id == null;
+	}
 
 	public Long getId() {
 		return id;
@@ -33,9 +44,6 @@ public class ModelLogin implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	private String login;
-	private String senha;
 
 	public String getLogin() {
 		return login;
